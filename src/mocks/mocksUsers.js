@@ -1,7 +1,6 @@
 const mockToken = "";
 
 const mockUserCredentials = {
-  id: 1,
   username: "username",
   password: "password",
 };

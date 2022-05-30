@@ -71,6 +71,7 @@ const loginUser = async (req, res, next) => {
       error.statusCode = 401;
       error.customMessage = "Incorrect username or password";
       next(error);
+      return;
     }
   } catch (error) {
     next(error);
