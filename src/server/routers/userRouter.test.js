@@ -1,4 +1,4 @@
-require("dotenv").config();
+/* require("dotenv").config();
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const mongoose = require("mongoose");
 const request = require("supertest");
@@ -60,4 +60,4 @@ describe("Given a POST to the users/login endpoint", () => {
       expect(token).not.toBeNull();
     });
   });
-});
+}); */
