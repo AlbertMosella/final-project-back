@@ -53,8 +53,7 @@ const loginUser = async (req, res, next) => {
 
       if (checkPassword) {
         const userData = {
-          username: user.username,
-          id: user.id,
+          name: user.name,
         };
 
         const token = jsonwebtoken.sign(userData, process.env.JWT_SECRET);
