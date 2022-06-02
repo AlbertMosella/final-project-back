@@ -7,7 +7,7 @@
 
 ## Property Endpoints
 
-- [ ] Get All Properties Endpoint
+- [x] Get All Properties Endpoint
 - [ ] Get Property Endpoint
 - [ ] Delete Property Endpoint
 - [ ] Create Property Endpoint
