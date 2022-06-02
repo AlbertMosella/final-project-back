@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
-const debug = require("debug");
+const debug = require("debug")("rustik:userControllers");
 const chalk = require("chalk");
 const User = require("../../database/model/User");
 
