@@ -1,9 +1,9 @@
-const { mockProperties } = require("../../mocks/mockProperties");
+const { mockProperty } = require("../../mocks/mockProperties");
 const { getProperties } = require("./propertyControllers");
 
 jest.mock("../../database/model/Property", () => ({
   ...jest.requireActual("../../database/model/Property"),
-  find: jest.fn().mockResolvedValue(mockProperties),
+  find: jest.fn().mockResolvedValue(mockProperty),
 }));
 
 describe("Given the GET properties controller", () => {
@@ -20,12 +20,12 @@ describe("Given the GET properties controller", () => {
       expect(res.status).toHaveBeenCalledWith(expectedStatus);
     });
 
-    test("Then it should call the response json method with a list of games", async () => {
-      const expectedGames = mockProperties;
+    test("Then it should call the response json method with a list of properties", async () => {
+      const expectedProperties = mockProperty;
 
       await getProperties(null, res);
 
-      expect(res.json).toHaveBeenCalledWith(expectedGames);
+      expect(res.json).toHaveBeenCalledWith(expectedProperties);
     });
   });
 });
