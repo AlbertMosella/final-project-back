@@ -8,4 +8,11 @@ const getProperties = async (req, res) => {
   res.status(200).json(properties);
 };
 
-module.exports = { getProperties };
+const deleteProperty = async (req, res) => {
+  debug(chalk.green("Request to delete a property received"));
+  const { idProperty } = req.params;
+  await Property.findByIdAndDelete(idProperty);
+  res.status(200).json({ msg: `The property has been deleted` });
+};
+
+module.exports = { getProperties, deleteProperty };
