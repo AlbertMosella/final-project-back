@@ -1,13 +1,18 @@
 const { mockProperty, mockProperties } = require("../../mocks/mockProperties");
-const { getProperties, deleteProperty } = require("./propertyControllers");
+const {
+  getProperties,
+  deleteProperty,
+  createProperty,
+} = require("./propertyControllers");
 
 jest.mock("../../database/model/Property", () => ({
   ...jest.requireActual("../../database/model/Property"),
   find: jest.fn().mockResolvedValue(mockProperty),
   findByIdAndDelete: jest.fn().mockResolvedValue(mockProperties),
+  create: jest.fn().mockResolvedValue(mockProperty),
 }));
 
-describe("Given the GET properties controller", () => {
+describe("Given a GET properties controller", () => {
   describe("When invoked with a response", () => {
     const res = {
       status: jest.fn().mockReturnThis(),
@@ -31,11 +36,11 @@ describe("Given the GET properties controller", () => {
   });
 });
 
-describe("Given a deleteProperty function", () => {
+describe("Given a DELETE deleteProperty controller", () => {
   describe("When invoked when a response and a property with id 1", () => {
     const req = {
       params: {
-        idRobot: "6299ef4267d5ef56ab0e6bb7",
+        idProperty: "6299ef4267d5ef56ab0e6bb7",
       },
     };
 
@@ -59,6 +64,35 @@ describe("Given a deleteProperty function", () => {
       };
 
       expect(res.json).toHaveBeenCalledWith(expectedMessage);
+    });
+  });
+});
+
+describe("Given a createProperty function", () => {
+  describe("When invoked whit a response and a property", () => {
+    const req = {
+      body: mockProperty,
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    test("Then it should call the response status method with 201", async () => {
+      const expectedStatus = 201;
+
+      await createProperty(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+    });
+
+    test("Then it should call the response json method a message", () => {
+      const expectedRespone = mockProperty;
+
+      createProperty(req, res);
+
+      expect(res.json).toHaveBeenCalledWith(expectedRespone);
     });
   });
 });
