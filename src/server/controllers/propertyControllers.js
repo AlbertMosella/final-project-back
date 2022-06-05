@@ -15,4 +15,11 @@ const deleteProperty = async (req, res) => {
   res.status(200).json({ msg: `The property has been deleted` });
 };
 
-module.exports = { getProperties, deleteProperty };
+const createProperty = async (req, res) => {
+  debug(chalk.green("Request to create a property received"));
+  const property = req.body;
+  const newProperty = await Property.create(property);
+  res.status(201).json(newProperty);
+};
+
+module.exports = { getProperties, deleteProperty, createProperty };

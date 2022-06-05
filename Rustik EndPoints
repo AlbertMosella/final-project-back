@@ -1,9 +1,9 @@
 {
-  "info": {
-    "_postman_id": "84f64bb6-e8cc-465f-8a2d-05c6adad5603",
-    "name": "New Collection",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "20646501"
-  },
-  "item": []
+	"info": {
+		"_postman_id": "84f64bb6-e8cc-465f-8a2d-05c6adad5603",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20646501"
+	},
+	"item": []
 }
