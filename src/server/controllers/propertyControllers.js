@@ -22,4 +22,17 @@ const createProperty = async (req, res) => {
   res.status(201).json(newProperty);
 };
 
-module.exports = { getProperties, deleteProperty, createProperty };
+const editProperty = async (req, res) => {
+  debug(chalk.yellowBright("Request to edit a property received"));
+  const { idProperty } = req.params;
+  const property = req.body;
+  await Property.findByIdAndUpdate({ id: idProperty }, property);
+  res.status(200).json(property);
+};
+
+module.exports = {
+  getProperties,
+  deleteProperty,
+  createProperty,
+  editProperty,
+};
