@@ -3,6 +3,7 @@ const {
   getProperties,
   deleteProperty,
   createProperty,
+  editProperty,
 } = require("./propertyControllers");
 
 jest.mock("../../database/model/Property", () => ({
@@ -10,6 +11,7 @@ jest.mock("../../database/model/Property", () => ({
   find: jest.fn().mockResolvedValue(mockProperty),
   findByIdAndDelete: jest.fn().mockResolvedValue(mockProperties),
   create: jest.fn().mockResolvedValue(mockProperty),
+  findByIdAndUpdate: jest.fn().mockResolvedValue(mockProperties),
 }));
 
 describe("Given a GET properties controller", () => {
@@ -68,7 +70,7 @@ describe("Given a DELETE deleteProperty controller", () => {
   });
 });
 
-describe("Given a createProperty function", () => {
+describe("Given a POST createProperty controller", () => {
   describe("When invoked whit a response and a property", () => {
     const req = {
       body: mockProperty,
@@ -91,6 +93,36 @@ describe("Given a createProperty function", () => {
       const expectedRespone = mockProperty;
 
       createProperty(req, res);
+
+      expect(res.json).toHaveBeenCalledWith(expectedRespone);
+    });
+  });
+});
+
+describe("Given a editProperty controller", () => {
+  describe("When invoked whit a response, a property and the property id as request param", () => {
+    const req = {
+      params: "6298c3c6b8f201e2a9ddc4f3",
+      body: mockProperty,
+    };
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+
+    test("Then it should call the response status method with a 200", async () => {
+      const expectedStatus = 200;
+
+      await editProperty(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+    });
+
+    test("Then it should call the response json method with a property", () => {
+      const expectedRespone = mockProperty;
+
+      editProperty(req, res);
 
       expect(res.json).toHaveBeenCalledWith(expectedRespone);
     });
