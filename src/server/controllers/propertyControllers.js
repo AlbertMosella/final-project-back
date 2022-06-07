@@ -26,7 +26,7 @@ const editProperty = async (req, res) => {
   debug(chalk.yellowBright("Request to edit a property received"));
   const { idProperty } = req.params;
   const property = req.body;
-  await Property.findByIdAndUpdate({ id: idProperty }, property);
+  await Property.findByIdAndUpdate({ _id: idProperty }, property);
   res.status(200).json(property);
 };
 
