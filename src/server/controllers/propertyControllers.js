@@ -30,9 +30,17 @@ const editProperty = async (req, res) => {
   res.status(200).json(property);
 };
 
+const getOneProperty = async (req, res) => {
+  const { idProperty } = req.params;
+  const property = await Property.findById(idProperty);
+  debug(chalk.green("Request to get one property received"));
+  res.status(200).json(property);
+};
+
 module.exports = {
   getProperties,
   deleteProperty,
   createProperty,
   editProperty,
+  getOneProperty,
 };
