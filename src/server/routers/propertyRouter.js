@@ -1,4 +1,6 @@
 const express = require("express");
+const multer = require("multer");
+const path = require("path");
 const {
   getProperties,
   deleteProperty,
@@ -9,9 +11,13 @@ const {
 
 const propertyRouter = express.Router();
 
+const upload = multer({
+  dest: path.join("uploads", "images"),
+});
+
 propertyRouter.get("/", getProperties);
 propertyRouter.delete("/:idProperty", deleteProperty);
-propertyRouter.post("/", createProperty);
+propertyRouter.post("/", upload.single("image"), createProperty);
 propertyRouter.put("/:idProperty", editProperty);
 propertyRouter.get("/:idProperty", getOneProperty);
 
