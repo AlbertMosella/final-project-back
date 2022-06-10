@@ -8,6 +8,7 @@ const {
   editProperty,
   getOneProperty,
 } = require("../controllers/propertyControllers");
+const auth = require("../middlewares/auth/auth");
 
 const propertyRouter = express.Router();
 
@@ -16,9 +17,9 @@ const upload = multer({
 });
 
 propertyRouter.get("/", getProperties);
-propertyRouter.delete("/:idProperty", deleteProperty);
-propertyRouter.post("/", upload.single("image"), createProperty);
-propertyRouter.put("/:idProperty", editProperty);
+propertyRouter.delete("/:idProperty", auth, deleteProperty);
+propertyRouter.post("/", upload.single("image"), auth, createProperty);
+propertyRouter.put("/:idProperty", auth, editProperty);
 propertyRouter.get("/:idProperty", getOneProperty);
 
 module.exports = propertyRouter;
