@@ -1,7 +1,5 @@
 const chalk = require("chalk");
 const debug = require("debug")("rustik:propertyControllers");
-const path = require("path");
-const fs = require("fs");
 const Property = require("../../database/model/Property");
 
 const getProperties = async (req, res) => {
@@ -17,27 +15,9 @@ const deleteProperty = async (req, res) => {
   res.status(200).json({ msg: `The property has been deleted` });
 };
 
-const createProperty = async (req, res, next) => {
+const createProperty = async (req, res) => {
   debug(chalk.green("Request to create a property received"));
   const property = req.body;
-
-  const { file } = req;
-
-  if (file) {
-    const newFileName = `${Date.now()}${file.originalname}`;
-    fs.rename(
-      path.join("uploads", "images", file.filename),
-      path.join("uploads", "images", newFileName),
-      (error) => {
-        if (error) {
-          debug(chalk.red("Error renaming picture post"));
-
-          next(error);
-        }
-      }
-    );
-    property.image = newFileName;
-  }
   const newProperty = await Property.create(property);
   res.status(201).json(newProperty);
 };
